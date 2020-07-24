@@ -5,10 +5,11 @@ function sendValues(){
     userLowerLimit = document.getElementById("userLowerLimit").value;
     userUpperLimit = document.getElementById("userUpperLimit").value;
     limit(userLowerLimit, userUpperLimit);
+    console.log("yo we getting intothis funtcion?");
 }
 
 function limit(userLowerLimit, userUpperLimit) {
-    fetch('https://pokeapi.co/api/v2/ability/?offset=' + userLowerLimit + '&limit=' + userUpperLimit)
+    fetch('https://pokeapi.co/api/v2/ability/?offset=' + userLowerLimit + '&limit=' + (userUpperLimit-userLowerLimit))
     .then(
     function(response) {
     if (response.status !== 200) {
