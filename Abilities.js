@@ -1,6 +1,7 @@
 (() => {
     let userUpperLimit;
     let userLowerLimit;
+    let abilityBtn = document.querySelector("#abilityBtn");
     
     function sendValues() {
       userLowerLimit = document.getElementById("userLowerLimit").value;
@@ -42,4 +43,10 @@
         });
       });
     }
+
+    abilityBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        sendValues();
+    })
 })(window);
