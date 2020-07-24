@@ -30,15 +30,37 @@
             console.log(data.results[i].name);
             console.log(data.results[i].url);
     
-            let para = document.createElement("P"); // Create a <p> element
+            let para = document.createElement("p"); // Create a <p> element
+            let effectEntry = document.createElement("p");
             para;
             para.className = "alert alert-danger col-md-8";
             para.innerText = `The name is : ${data.results[i].name} \n
             The url is : ${data.results[i].url}`; // Insert text
+
+            // Inner URL data
+            fetch(`${data.results[i].url}`)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return Promise.reject({
+                        status: response.status,
+                        statusText: response.statusText
+                    });
+                }
+            })
+            .then((innerData) => {
+                effectEntry.innerText = `${innerData.effect_entries[1].effect}`;
+                console.log(innerData);
+            })
+            .catch((error) => {
+                console.log(`Error: ${error.status}, ${error.statusText}`);
+            });
     
             let myDiv = document.getElementById("myDiv");
-    
+            myDiv.classList = "bg-warning";
             myDiv.appendChild(para);
+            para.appendChild(effectEntry);
           }
         });
       });
